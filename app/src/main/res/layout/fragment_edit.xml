@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="50dp"
+    android:gravity="center"
+    tools:context=".EditFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="top|center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="71dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="17dp"
+            android:src="@drawable/moptro" />
+
+        <EditText
+            android:id="@+id/edit_name"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:hint="Name"
+            android:gravity="start"
+            android:drawableLeft="@drawable/name"
+            android:drawableTint="#FFFFFF"
+            android:elevation="20dp"
+            android:drawablePadding="10dp"
+            android:inputType="text"
+            android:padding="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginBottom="25dp"
+            android:textStyle="bold"
+            android:textColorHint="#D8CCBEBE"
+            android:background="@drawable/edittextback"/>
+
+        <EditText
+            android:id="@+id/edit_dob"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:hint="DOB"
+            android:gravity="start"
+            android:drawableLeft="@drawable/dob"
+            android:drawableTint="#FFFFFF"
+            android:elevation="20dp"
+            android:drawablePadding="10dp"
+            android:inputType="date"
+            android:padding="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginBottom="25dp"
+            android:textStyle="bold"
+            android:textColorHint="#D8CCBEBE"
+            android:background="@drawable/edittextback"/>
+
+        <EditText
+            android:id="@+id/edit_role"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:hint="Role"
+            android:gravity="start"
+            android:drawableLeft="@drawable/work"
+            android:drawableTint="#FFFFFF"
+            android:elevation="20dp"
+            android:drawablePadding="10dp"
+            android:inputType="text"
+            android:padding="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginBottom="25dp"
+            android:textStyle="bold"
+            android:textColorHint="#D8CCBEBE"
+            android:background="@drawable/edittextback"/>
+
+        <EditText
+            android:id="@+id/edit_pass"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:hint="Password"
+            android:gravity="start"
+            android:drawableLeft="@drawable/pass"
+            android:drawableTint="#FFFFFF"
+            android:elevation="20dp"
+            android:drawablePadding="10dp"
+            android:inputType="textPassword"
+            android:padding="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginBottom="25dp"
+            android:textStyle="bold"
+            android:textColorHint="#D8CCBEBE"
+            android:background="@drawable/edittextback"/>
+
+        <Button
+            android:id="@+id/edit_update"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="26dp"
+            android:background="@drawable/bccolor"
+            android:text="Update Details"
+            android:textAllCaps="false"
+            android:textColor="#FFFF8C"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/logout"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:background="@drawable/text_button"
+            android:text="Log Out"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_marginBottom="25dp"
+            android:textSize="16sp"
+            android:textColor="#F44336"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+</ScrollView>

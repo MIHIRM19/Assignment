@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/backgrounddetails">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="end"
+            android:gravity="end|center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal"
+                android:background="@color/white"/>
+
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end|right"
+                android:layout_marginRight="20dp"
+                android:elevation="50dp"
+                android:gravity="center"
+                android:foregroundGravity="right"
+                android:background="@drawable/round"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/emp_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text=" 1 "
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="#FFFFFF"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:paddingBottom="15dp"
+            android:layout_marginLeft="17dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="20dp"
+                android:text="EMP ID  :  "
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#D8CCBEBE"/>
+
+            <TextView
+                android:id="@+id/emp_id"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text=" 1 "
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"/>
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:paddingBottom="15dp"
+            android:layout_marginLeft="17dp"
+            android:gravity="start"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="20dp"
+                android:text="Name    :  "
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#D8CCBEBE"/>
+
+            <TextView
+                android:id="@+id/emp_name"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text=" Mihir Patil "
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:paddingBottom="15dp"
+            android:layout_marginLeft="17dp"
+            android:gravity="start"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="20dp"
+                android:text="DOB       :  "
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#D8CCBEBE"/>
+
+            <TextView
+                android:id="@+id/emp_dob"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text=" 03-05-2001 "
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#F44336"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:paddingBottom="25dp"
+            android:layout_marginLeft="17dp"
+            android:gravity="start"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="25dp"
+                android:text="Role       :  "
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#D8CCBEBE"/>
+
+            <TextView
+                android:id="@+id/emp_role"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:text=" Software Developer "
+                android:textColor="@color/purple_500"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
