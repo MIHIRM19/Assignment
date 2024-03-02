@@ -24,7 +24,7 @@
             android:id="@+id/searchBar"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-                android:hint="Search with Employee ID..."
+            android:hint="Search with Employee Name..."
             android:gravity="center"
             android:drawableRight="@drawable/search"
             android:drawableTint="#FFFFFF"

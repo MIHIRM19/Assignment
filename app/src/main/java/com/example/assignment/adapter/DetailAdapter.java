@@ -17,54 +17,75 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import java.util.List;
 
-public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder> {
+public class DetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    Context context;
-    List<Detail> detailList;
+    private static final int TYPE = 1;
+    private final Context context;
+    private final List<Object> listRecyclerItem;
 
-    public DetailAdapter(Context context, List<Detail> detailList) {
+    public DetailAdapter(Context context, List<Object> listRecyclerItem) {
         this.context = context;
-        this.detailList = detailList;
+        this.listRecyclerItem = listRecyclerItem;
     }
-
-    public void setData(List<Detail> newData) {
-        // Update the dataset with the new data
-        this.detailList = newData;
-        // Notify the adapter that the data has changed
-        notifyDataSetChanged();
-    }
-
 
     @NonNull
     @Override
-    public DetailAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(com.example.assignment.R.layout.employee_detail,parent,false));
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        switch (i) {
+            case TYPE:
+
+            default:
+
+                View layoutView = LayoutInflater.from(viewGroup.getContext()).inflate(
+                        com.example.assignment.R.layout.employee_detail, viewGroup, false);
+
+                return new ItemViewHolder((layoutView));
+        }
+
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DetailAdapter.ViewHolder holder, int position) {
-        holder.emp_id.setText(detailList.get(position).getEmp_id());
-        holder.emp_no.setText(detailList.get(position).getEmp_no());
-        holder.emp_name.setText(detailList.get(position).getEmp_name());
-        holder.emp_dob.setText(detailList.get(position).getEmp_dob());
-        holder.emp_role.setText(detailList.get(position).getEmp_role());
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+        int viewType = getItemViewType(i);
+
+        switch (viewType) {
+            case TYPE:
+            default:
+
+                ItemViewHolder itemViewHolder = (ItemViewHolder) viewHolder;
+                Detail details = (Detail) listRecyclerItem.get(i);
+
+                itemViewHolder.emp_no.setText(details.getEmp_no());
+                itemViewHolder.emp_id.setText(details.getEmp_id());
+                itemViewHolder.emp_name.setText(details.getEmp_name());
+                itemViewHolder.emp_dob.setText(details.getEmp_dob());
+                itemViewHolder.emp_role.setText(details.getEmp_role());
+        }
 
     }
+
 
     @Override
     public int getItemCount() {
-        return detailList.size();
+        return listRecyclerItem.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView emp_id, emp_no, emp_name, emp_dob, emp_role;
-        public ViewHolder(@NonNull View itemView) {
+    public class ItemViewHolder extends RecyclerView.ViewHolder {
+
+        private TextView emp_no;
+        private TextView emp_id;
+        private TextView emp_name;
+        private TextView emp_dob;
+        private TextView emp_role;
+
+        public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            emp_id =itemView.findViewById(com.example.assignment.R.id.emp_id);
-            emp_no =itemView.findViewById(com.example.assignment.R.id.emp_no);
-            emp_name =itemView.findViewById(com.example.assignment.R.id.emp_name);
-            emp_dob =itemView.findViewById(com.example.assignment.R.id.emp_dob);
-            emp_role =itemView.findViewById(com.example.assignment.R.id.emp_role);
+            emp_no = (TextView) itemView.findViewById(com.example.assignment.R.id.emp_no);
+            emp_id = (TextView) itemView.findViewById(com.example.assignment.R.id.emp_id);
+            emp_name = (TextView) itemView.findViewById(com.example.assignment.R.id.emp_name);
+            emp_dob = (TextView) itemView.findViewById(com.example.assignment.R.id.emp_dob);
+            emp_role = (TextView) itemView.findViewById(com.example.assignment.R.id.emp_role);
         }
     }
+
 }

@@ -36,17 +36,28 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class UserFragment extends Fragment {
 
-    List<Detail> detailList;
-    DetailAdapter detailAdapter;
-    FirebaseFirestore db;
+    private List<Object> viewItems = new ArrayList<>();
+
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+
+    private static final String TAG = "MainActivity";
     ProgressBar progressBar;
-    RecyclerView Employee;
+    private RecyclerView Employee;
     EditText searchBar;
 
     @SuppressLint("MissingInflatedId")
@@ -54,16 +65,24 @@ public class UserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user, container, false);
-        Employee = view.findViewById(R.id.Employee);
+
         searchBar = view.findViewById(R.id.searchBar);
         progressBar = view.findViewById(R.id.progressBar);
-        db = FirebaseFirestore.getInstance();
         progressBar.setVisibility(View.VISIBLE);
 
-        detailList = new ArrayList<>();
-        detailAdapter = new DetailAdapter(getActivity(), detailList);
-        Employee.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
-        Employee.setAdapter(detailAdapter);
+        Employee = view.findViewById(R.id.Employee);
+        Employee.setHasFixedSize(true);
+
+        // use a linear layout manager
+        layoutManager = new LinearLayoutManager(getContext());
+        Employee.setLayoutManager(layoutManager);
+
+        // specify an adapter (see also next example)
+        mAdapter = new DetailAdapter(getContext(), viewItems);
+        Employee.setAdapter(mAdapter);
+
+        addItemsFromJSON();
+
 
         // Add a TextWatcher to the search bar EditText
         searchBar.addTextChangedListener(new TextWatcher() {
@@ -77,55 +96,78 @@ public class UserFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                // Perform search when text changes
-                searchUser(s.toString());
+                searchEmployee(s.toString());
             }
         });
 
-        loadEmployeeList();
 
         return view;
     }
 
-    private void loadEmployeeList() {
-        db.collection("EmployeeList")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        detailList.clear(); // Clear the list before adding new data
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Detail detail = document.toObject(Detail.class);
-                            detailList.add(detail);
-                        }
-                        detailAdapter.notifyDataSetChanged();
-                        progressBar.setVisibility(View.GONE);
-                    } else {
-                        Toast.makeText(getActivity(), "Failed to fetch employees", Toast.LENGTH_SHORT).show();
-                    }
-                });
+    private void searchEmployee(String text) {
+        List<Object> filteredList = new ArrayList<>();
+
+        for (Object item : viewItems) {
+            if (item instanceof Detail) {
+                Detail detail = (Detail) item;
+                if (detail.getEmp_name().toLowerCase().contains(text.toLowerCase())) {
+                    filteredList.add(detail);
+                }
+            }
+        }
+
+        mAdapter = new DetailAdapter(getContext(), filteredList);
+        Employee.setAdapter(mAdapter);
     }
 
-    private void searchUser(String query) {
-        detailList.clear();
+    private void addItemsFromJSON() {
+        try {
 
-        if (TextUtils.isEmpty(query)) {
-            loadEmployeeList();
-        } else {
-            db.collection("EmployeeList")
-                    .whereEqualTo("emp_id", query.toLowerCase())
-                    .get()
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Detail detail = document.toObject(Detail.class);
-                                detailList.add(detail);
-                            }
-                            detailAdapter.notifyDataSetChanged();
-                        } else {
-                            Toast.makeText(getActivity(), "Failed to search employees", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            String jsonDataString = readJSONDataFromFile();
+            JSONArray jsonArray = new JSONArray(jsonDataString);
+
+            for (int i=0; i<jsonArray.length(); ++i) {
+
+                JSONObject itemObj = jsonArray.getJSONObject(i);
+
+                String emp_id = itemObj.getString("emp_id");
+                String emp_no = itemObj.getString("emp_no");
+                String emp_name = itemObj.getString("emp_name");
+                String emp_dob = itemObj.getString("emp_dob");
+                String emp_role = itemObj.getString("emp_role");
+
+                Detail details = new Detail(emp_id, emp_no, emp_name, emp_dob, emp_role);
+                viewItems.add(details);
+                progressBar.setVisibility(View.GONE);
+            }
+
+        } catch (JSONException | IOException e) {
+            Log.d(TAG, "addItemsFromJSON: ", e);
         }
+    }
+
+    private String readJSONDataFromFile() throws IOException{
+
+        InputStream inputStream = null;
+        StringBuilder builder = new StringBuilder();
+
+        try {
+
+            String jsonString = null;
+            inputStream = getResources().openRawResource(R.raw.detail);
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(inputStream, "UTF-8"));
+
+            while ((jsonString = bufferedReader.readLine()) != null) {
+                builder.append(jsonString);
+            }
+
+        } finally {
+            if (inputStream != null) {
+                inputStream.close();
+            }
+        }
+        return new String(builder);
     }
 
 
